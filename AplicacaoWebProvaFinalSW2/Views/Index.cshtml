@@ -1,0 +1,38 @@
+﻿namespace AplicacaoWebProvaFinalSW2
+{
+@model List<SeuNamespaceDoProjeto.Models.Produto>
+
+<h2>Lista de Produtos</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Preço</th>
+            <th>Status</th>
+            <th>Cadastrado por</th>
+            <th>Atualizado por</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var produto in Model)
+        {
+            <tr>
+                <td>@produto.Id</td>
+                <td>@produto.Nome</td>
+                <td>@produto.Preco</td>
+                <td>@(produto.Status ? "Ativo" : "Inativo")</td>
+                <td>@produto.UsuarioCadastro?.Nome</td>
+                <td>@(produto.UsuarioUpdate != null ? produto.UsuarioUpdate.Nome : "-")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@produto.Id">Editar</a> |
+                    <a asp-action="Delete" asp-route-id="@produto.Id">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+}
